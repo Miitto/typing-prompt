@@ -68,9 +68,13 @@
 
 @layer base {
   * {
-    @apply border-border;
+    @apply border-border m-0;
   }
   body {
     @apply bg-background text-foreground;
+  }
+
+  html, body, #root, main {
+    @apply min-w-full min-h-full;
   }
 }

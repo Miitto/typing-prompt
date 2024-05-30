@@ -1,0 +1,44 @@
+{
+    "name": "Colemak DH",
+    "layout": [
+        [
+            { "key": "q", "finger": 1 },
+            { "key": "w", "finger": 2 },
+            { "key": "f", "finger": 3 },
+            { "key": "p", "finger": 4 },
+            { "key": "b", "finger": 4 },
+            { "key": "j", "finger": 5 },
+            { "key": "l", "finger": 5 },
+            { "key": "u", "finger": 6 },
+            { "key": "y", "finger": 7 },
+            { "key": ";", "finger": 8 }
+        ],
+        [
+            { "key": "a", "finger": 1 },
+            { "key": "r", "finger": 2 },
+            { "key": "s", "finger": 3 },
+            { "key": "t", "finger": 4 },
+            { "key": "g", "finger": 4 },
+            { "key": "m", "finger": 5 },
+            { "key": "n", "finger": 5 },
+            { "key": "e", "finger": 6 },
+            { "key": "i", "finger": 7 },
+            { "key": "o", "finger": 8 }
+        ],
+        [
+            { "key": "z", "finger": 1 },
+            { "key": "x", "finger": 2 },
+            { "key": "c", "finger": 3 },
+            { "key": "d", "finger": 4 },
+            { "key": "v", "finger": 4 },
+            { "key": "k", "finger": 5 },
+            { "key": "h", "finger": 5 },
+            { "key": ",", "finger": 6 },
+            { "key": ".", "finger": 7 },
+            { "key": "/", "finger": 8 }
+        ]
+    ],
+    "homeRow": 1,
+    "leftHome": 3,
+    "rightHome": 6
+}
