@@ -1,29 +1,20 @@
-import { Show, createSignal, onMount } from "solid-js";
 import { invoke } from "@tauri-apps/api/tauri";
 import { ColorModeProvider, ColorModeScript } from "@kobalte/core";
 import Keyboard from "./Keyboard";
-import { LayoutContextProvider } from "./LayoutContextProvider";
+import { LayoutContextProvider } from "./providers/LayoutContextProvider";
+import { KeyContextProvider } from "./providers/KeyContextProvider";
 
 function App() {
-    const [keyEvent, setKeyEvent] = createSignal<KeyboardEvent | null>(null);
-    const key = () => keyEvent()?.key;
-
-    function onKeyDown(event: KeyboardEvent) {
-        setKeyEvent(event);
-    }
-
-    onMount(() => {
-        window.addEventListener("keydown", onKeyDown);
-    });
-
     return (
         <>
             <ColorModeScript />
             <ColorModeProvider>
                 <LayoutContextProvider layout="colemak-dh">
-                    <main>
-                        <Keyboard />
-                    </main>
+                    <KeyContextProvider>
+                        <main class="flex flex-col items-center justify-center h-full grow">
+                            <Keyboard />
+                        </main>
+                    </KeyContextProvider>
                 </LayoutContextProvider>
             </ColorModeProvider>
         </>

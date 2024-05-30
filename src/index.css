@@ -71,10 +71,14 @@
     @apply border-border m-0;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground flex flex-col min-h-full;
   }
 
-  html, body, #root, main {
-    @apply min-w-full min-h-full;
+  html {
+    @apply h-full;
+  }
+
+  #root {
+    @apply min-w-full min-h-full grow basis-full flex flex-col;
   }
 }

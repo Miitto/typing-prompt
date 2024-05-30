@@ -1,42 +1,73 @@
-import { For, Show, createSignal, onMount } from "solid-js";
-import { useLayoutContext } from "./LayoutContextProvider";
-import { A } from "node_modules/@kobalte/core/dist/index-bbdc4715";
+import { For, Show, createEffect } from "solid-js";
+import { useLayoutContext } from "./providers/LayoutContextProvider";
+import { useKeyContext } from "./providers/KeyContextProvider";
 
 export default function Keyboard() {
     const layoutContext = useLayoutContext();
     const layout = layoutContext?.layout;
-    const [keys, setKeys] = createSignal<string[]>([]);
+
+    const { allKeys: keys } = useKeyContext();
 
     const maxLength = () =>
         layout!()?.layout.reduce((acc, row) => Math.max(acc, row.length), 0) ??
         0;
 
-    function onKeyDown(event: KeyboardEvent) {
-        setKeys((keys) => [...keys, event.key]);
-    }
-
-    function onKeyUp(event: KeyboardEvent) {
-        setTimeout(() => {
-            setKeys((keys) => keys.filter((key) => key !== event.key));
-        }, 100);
-    }
-
-    onMount(() => {
-        window.addEventListener("keydown", onKeyDown);
-        window.addEventListener("keyup", onKeyUp);
+    createEffect(() => {
+        console.log(maxLength());
     });
 
     return (
         <div class="w-fit h-fit ">
             <Show when={layout}>
-                <div class="flex h-8 w-fit flex-col">
+                <div
+                    style={`grid-template-columns: 4rem repeat(${maxLength()}, 3rem);`}
+                    class="grid w-full h-full gap-0.5"
+                >
                     <For each={layout!()?.layout ?? []}>
-                        {(row) => (
-                            <div class="flex w-8 h-full">
+                        {(row, i) => (
+                            <div class="grid grid-cols-subgrid col-span-full h-12">
+                                <Show when={i() === 0}>
+                                    <div
+                                        class="w-full h-full flex grow-0 shrink-0 justify-center items-center"
+                                        classList={{
+                                            "bg-accent": keys().includes("Tab"),
+                                            "bg-emerald-600":
+                                                !keys().includes("Tab"),
+                                        }}
+                                    >
+                                        <p>Tab</p>
+                                    </div>
+                                </Show>
+                                <Show when={i() === 1}>
+                                    <div
+                                        class="w-full h-full flex grow-0 shrink-0 justify-center items-center"
+                                        classList={{
+                                            "bg-accent":
+                                                keys().includes("Shift"),
+                                            "bg-emerald-600":
+                                                !keys().includes("Shift"),
+                                        }}
+                                    >
+                                        <p>Shift</p>
+                                    </div>
+                                </Show>
+                                <Show when={i() === 2}>
+                                    <div
+                                        class="w-full h-full flex grow-0 shrink-0 justify-center items-center"
+                                        classList={{
+                                            "bg-accent":
+                                                keys().includes("Control"),
+                                            "bg-emerald-600":
+                                                !keys().includes("Control"),
+                                        }}
+                                    >
+                                        <p>Ctrl</p>
+                                    </div>
+                                </Show>
                                 <For each={row}>
                                     {(key) => (
                                         <div
-                                            class="w-8 h-8 border border-border flex grow-0 shrink-0 justify-center"
+                                            class="w-12 h-full flex grow-0 shrink-0 justify-center items-center"
                                             classList={{
                                                 "bg-accent": keys().includes(
                                                     key.key

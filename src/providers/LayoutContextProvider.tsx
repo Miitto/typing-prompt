@@ -5,8 +5,8 @@ import {
     createSignal,
     useContext,
 } from "solid-js";
-import { Layout } from "./lib/types/layout";
-import { layouts } from "./lib/layouts/layouts";
+import { Layout } from "../lib/types/layout";
+import { layouts } from "../lib/layouts/layouts";
 
 export type LayoutContext = {
     layout: Accessor<Layout | null>;
